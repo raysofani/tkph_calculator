@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tyre Position Selection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .tyre-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .tyre-card {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .tyre-card:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            transform: scale(1.05);
+        }
+        .tyre-position {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .tyre-details {
+            color: #7f8c8d;
+        }
+        @media (max-width: 768px) {
+            .tyre-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Tyre Position for Dumper {{ dumper_id }}</h1>
+        <div class="tyre-grid">
+            <a href="/tkph-calculator?dumper_id={{ dumper_id }}&tyre_position=front-left" class="tyre-card">
+                <div class="tyre-position">Front Left Tyre</div>
+                <div class="tyre-details">Position: 1 (Front Left)</div>
+            </a>
+            <a href="/tkph-calculator?dumper_id={{ dumper_id }}&tyre_position=front-right" class="tyre-card">
+                <div class="tyre-position">Front Right Tyre</div>
+                <div class="tyre-details">Position: 2 (Front Right)</div>
+            </a>
+            <a href="/tkph-calculator?dumper_id={{ dumper_id }}&tyre_position=rear-left" class="tyre-card">
+                <div class="tyre-position">Rear Left Tyre</div>
+                <div class="tyre-details">Position: 3 (Rear Left)</div>
+            </a>
+            <a href="/tkph-calculator?dumper_id={{ dumper_id }}&tyre_position=rear-right" class="tyre-card">
+                <div class="tyre-position">Rear Right Tyre</div>
+                <div class="tyre-details">Position: 4 (Rear Right)</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

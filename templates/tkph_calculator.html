@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TKPH Calculation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --background-color: #f0f4f8;
+            --card-background: #ffffff;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .calculator-container {
+            background: var(--card-background);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 900px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        input, select {
+            padding: 12px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            grid-column: span 2;
+            justify-self: center;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .info-text {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>TKPH Calculator for Dumper {{ dumper_id }} - {{ tyre_position }}</h1>
+        
+        <div class="info-text">
+            Calculate Tons Kilometers Per Hour (TKPH) for your mining equipment tyre
+        </div>
+        
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Distance Loaded (km)</label>
+                    <input type="number" name="distance_loaded" step="0.01" required placeholder="Enter distance traveled when loaded">
+                </div>
+                <div class="form-group">
+                    <label>Cycle Time (hours)</label>
+                    <input type="number" name="cycle_time" step="0.01" required placeholder="Enter total cycle time">
+                </div>
+                <div class="form-group">
+                    <label>Terrain Type</label>
+                    <select name="terrain_type" required>
+                        <option value="Flat">Flat</option>
+                        <option value="Inclined">Inclined</option>
+                        <option value="Rocky">Rocky</option>
+                        <option value="Muddy">Muddy</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tire Wear Percentage</label>
+                    <input type="number" name="tire_wear_percentage" min="0" max="100" step="0.1" required placeholder="0-100%">
+                </div>
+                <div class="form-group">
+                    <label>Tyre Load Empty (kg)</label>
+                    <input type="number" name="tyre_load_empty" step="0.01" required placeholder="Tyre weight when empty">
+                </div>
+                <div class="form-group">
+                    <label>Tyre Load Fully Loaded (kg)</label>
+                    <input type="number" name="tyre_load_fully_loaded" step="0.01" required placeholder="Tyre weight when fully loaded">
+                </div>
+                <div class="form-group">
+                    <label>Round Trip Distances (comma-separated)</label>
+                    <input type="text" name="round_trip_distances" placeholder="e.g. 5.5, 6.2, 5.8" required>
+                </div>
+                <div class="form-group">
+                    <label>Cycles per Shift</label>
+                    <input type="number" name="cycles_per_shift" required placeholder="Number of trips per shift">
+                </div>
+                <div class="form-group">
+                    <label>Total Shift Hours</label>
+                    <input type="number" name="total_shift_hours" step="0.01" required placeholder="Total working hours per shift">
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Calculate TKPH</button>
+        </form>
+    </div>
+</body>
+</html>

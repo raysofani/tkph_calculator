@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TKPH Calculation Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f0f4f8;
+            --card-background: #ffffff;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --critical-color: #c0392b;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .result-container {
+            background: var(--card-background);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+        .result-header {
+            margin-bottom: 30px;
+        }
+        .result-details {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        .result-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+        }
+        .condition-status {
+            margin-bottom: 30px;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .normal {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        .warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        .danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        .critical {
+            background-color: var(--critical-color);
+            color: white;
+        }
+        .trend-chart {
+            max-width: 100%;
+            height: auto;
+        }
+        .back-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <div class="result-header">
+            <h1>TKPH Calculation Results</h1>
+            <p>Dumper ID: {{ dumper_id }} | Tyre Position: {{ tyre_position }}</p>
+        </div>
+
+        <div class="condition-status {{ condition_status.lower().replace(' ', '-') }}">
+            Condition Status: {{ condition_status }}
+        </div>
+
+        <div class="result-details">
+            <div class="result-card">
+                <h3>TKPH Final</h3>
+                <p>{{ tkph_final }}</p>
+            </div>
+            <div class="result-card">
+                <h3>Suitable TKPH</h3>
+                <p>{{ suitable_tkph }}</p>
+            </div>
+        </div>
+
+        {% if trend_chart %}
+        <div class="trend-chart-section">
+            <h3>TKPH Trend</h3>
+            <img src="data:image/png;base64,{{ trend_chart }}" alt="TKPH Trend Chart" class="trend-chart">
+        </div>
+        {% endif %}
+
+        <button class="back-button" onclick="window.location.href='/'">Back to Tyre Selection</button>
+    </div>
+</body>
+</html>
