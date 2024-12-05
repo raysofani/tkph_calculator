@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import io
 import base64
 import os
-import winsound  # Sound alerts for Windows
 
 app = Flask(__name__)
 
@@ -234,13 +233,6 @@ def tkph_calculator():
             
             # Evaluate TKPH conditions
             condition_status = evaluate_conditions(tkph_final, suitable_tkph)
-            
-            # Sound alert for critical conditions
-            if condition_status == "Critical Condition":
-                # Use winsound to play a repetitive alarm sound
-                # Frequency of 2500, duration of 1000 ms (1 second)
-                for _ in range(3):  # Repeat 3 times
-                    winsound.Beep(2500, 1000)
             
             # Save TKPH data
             save_tkph_data(dumper_id, tyre_position, tkph_final, suitable_tkph)
